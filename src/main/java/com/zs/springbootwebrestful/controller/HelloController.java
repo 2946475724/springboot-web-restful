@@ -1,7 +1,9 @@
 package com.zs.springbootwebrestful.controller;
 
+import com.zs.springbootwebrestful.exception.UserNotExistException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
@@ -16,7 +18,10 @@ public class HelloController {
 
     @ResponseBody
     @RequestMapping("/hello")
-    public String Hello(){
+    public String Hello(@RequestParam("user") String user){
+        if(user.equals("aaa")){
+            throw new UserNotExistException();
+        }
         return "Hello World";
     }
 
